@@ -37,6 +37,7 @@
       "prettier/prettier": "error",
       "react/prop-types": "off",
       "object-curly-newline": "off",
+      "arrow-parens": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
