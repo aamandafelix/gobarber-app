@@ -1,17 +1,16 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Image } from 'react-native';
 
-import { Container } from '../SignUp/styles';
+import { Container, Title } from './styles';
 
-const SignIn: React.FC = () => {
-  function todo() {
-    // todo
-  }
-  return (
-    <Container style={{ flex: 1, backgroundColor: '#312e38' }}>
-      <Text>Olar</Text>
-    </Container>
-  );
-};
+import logoImg from '../../assets/logo.png';
+
+const SignIn: React.FC = () => (
+  <Container>
+    <Image source={logoImg} />
+
+    <Title>Faça seu logon</Title>
+  </Container>
+);
 
 export default SignIn;
