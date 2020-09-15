@@ -38,6 +38,7 @@
       "react/prop-types": "off",
       "object-curly-newline": "off",
       "arrow-parens": "off",
+      "no-shadow": "off",
       "import/extensions": [
         "error",
         "ignorePackages",

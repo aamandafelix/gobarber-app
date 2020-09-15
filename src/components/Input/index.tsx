@@ -1,4 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  forwardRef,
+} from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
 
@@ -13,11 +18,25 @@ interface InputValueReference {
   value: string;
 }
 
-const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
+interface InputRef {
+  focus(): void;
+}
+
+const Input: React.RefForwardingComponent<InputRef, InputProps> = (
+  { name, icon, ...rest },
+  ref,
+) => {
   const { registerField, defaultValue = '', fieldName, error } = useField(name);
 
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
   const inputElementeRef = useRef<any>(null);
+
+  // injeta o focus do inputElementeRef.current para o focus do elemento pai
+  useImperativeHandle(ref, () => ({
+    focus() {
+      inputElementeRef.current.focus();
+    },
+  }));
 
   useEffect(() => {
     registerField<string>({
@@ -26,7 +45,7 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
       path: 'value',
       setValue(ref: any, value) {
         inputValueRef.current.value = value;
-        inputElementeRef.current.setNativeProps({ text: '' }); // muda visualmente o texto que tá no input
+        inputElementeRef.current.setNativeProps({ text: '' });
       },
       clearValue() {
         inputValueRef.current.value = '';
@@ -44,7 +63,6 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
         keyboardAppearance="dark"
         placeholderTextColor="#666360"
         defaultValue={defaultValue}
-        // está pegando o que está sendo preenchido e guardando no inputValueRef.value
         onChangeText={value => {
           inputValueRef.current.value = value;
         }}
@@ -54,4 +72,4 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
   );
 };
 
-export default Input;
+export default forwardRef(Input);
