@@ -17,6 +17,8 @@ import { FormHandles } from '@unform/core';
 
 import getValidationErros from '../../utils/getValidationErros';
 
+import { useAuth } from '../../hooks/auth';
+
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -39,6 +41,9 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const navigation = useNavigation();
 
+  const { signIn, user } = useAuth();
+  console.log('user', user);
+
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
@@ -55,6 +60,11 @@ const SignIn: React.FC = () => {
 
       await schema.validate(data, {
         abortEarly: false,
+      });
+
+      await signIn({
+        email: data.email,
+        password: data.password,
       });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
@@ -95,21 +105,22 @@ const SignIn: React.FC = () => {
                 autoCorrect={false}
                 autoCapitalize="none"
                 keyboardType="email-address"
+                returnKeyType="next"
+                onSubmitEditing={() => passwordInputRef.current?.focus()}
+                blurOnSubmit={false}
                 name="email"
                 icon="mail"
                 placeholder="E-mail"
-                returnKeyType="next"
-                onSubmitEditing={() => passwordInputRef.current?.focus()}
               />
 
               <Input
                 ref={passwordInputRef}
-                name="password"
-                icon="lock"
-                placeholder="Senha"
                 secureTextEntry
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
+                name="password"
+                icon="lock"
+                placeholder="Senha"
               />
             </Form>
 
