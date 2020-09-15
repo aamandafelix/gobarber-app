@@ -39,6 +39,8 @@
       "object-curly-newline": "off",
       "arrow-parens": "off",
       "no-shadow": "off",
+      "operator-linebreak": "off",
+      "implicit-arrow-linebreak": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
