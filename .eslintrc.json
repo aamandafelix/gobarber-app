@@ -41,6 +41,7 @@
       "no-shadow": "off",
       "operator-linebreak": "off",
       "implicit-arrow-linebreak": "off",
+      "no-unused-expressions": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
