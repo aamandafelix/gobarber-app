@@ -61,9 +61,7 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        console.log('response');
-        const response = await api.post('users', data);
-        console.log(response);
+        await api.post('users', data);
 
         Alert.alert(
           'Cadastro realizado',
