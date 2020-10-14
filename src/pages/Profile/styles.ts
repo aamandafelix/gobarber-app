@@ -5,12 +5,18 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   padding: 0 30px ${Platform.OS === 'android' ? 150 : 40}px;
-  position: relative;
 `;
 
-export const BackButton = styled.TouchableOpacity`
-  margin-top: ${Platform.OS === 'android' ? 130 : 40}px;
+export const ButtonsContainer = styled.View`
+  margin-top: ${Platform.OS === 'android' ? 150 : 60}px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
+
+export const BackButton = styled.TouchableOpacity``;
+
+export const SignOutButton = styled.TouchableOpacity``;
 
 export const Title = styled.Text`
   font-size: 20px;

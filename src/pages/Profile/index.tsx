@@ -26,7 +26,9 @@ import Button from '../../components/Button';
 
 import {
   Container,
+  ButtonsContainer,
   BackButton,
+  SignOutButton,
   Title,
   UserAvatarButton,
   UserAvatar,
@@ -41,7 +43,7 @@ interface ProfileFormData {
 }
 
 const Profile: React.FC = () => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, signOut } = useAuth();
 
   const navigation = useNavigation();
 
@@ -170,9 +172,15 @@ const Profile: React.FC = () => {
           contentContainerStyle={{ flex: 1 }}
         >
           <Container>
-            <BackButton onPress={navigateBack}>
-              <Icon name="chevron-left" size={24} color="#999591" />
-            </BackButton>
+            <ButtonsContainer>
+              <BackButton onPress={navigateBack}>
+                <Icon name="chevron-left" size={24} color="#999591" />
+              </BackButton>
+
+              <SignOutButton onPress={signOut}>
+                <Icon name="power" size={20} color="#999591" />
+              </SignOutButton>
+            </ButtonsContainer>
 
             <UserAvatarButton onPress={handleUpdateAvatar}>
               <UserAvatar source={{ uri: user.avatar_url }} />
